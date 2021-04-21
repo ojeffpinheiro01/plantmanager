@@ -3,6 +3,8 @@ import { View, Text, FlatList, StyleSheet } from 'react-native'
 
 import { EnvironmentButton } from '../components/EnvironmentButton'
 import { Header } from '../components/Header'
+import { PlantCardPrimary } from '../components/PlantCardPrimary'
+
 import api from '../services/api'
 
 import colors from '../styles/colors'
@@ -13,13 +15,27 @@ interface EnvironmentProps {
   title: string;
 }
 
+interface PlantProps {
+  id: string;
+  name: string;
+  about: string;
+  water_tips: string;
+  photo: string;
+  environments: [string];
+  frequency: {
+    times: number;
+    repeat_every: string;
+  }
+}
+
 export function PlantSelect() {
   const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
+  const [plants, setPlants] = useState<PlantProps[]>([])
 
   useEffect(() => {
     async function fetchEnvironment() {
       const { data } = await api
-        .get('plants_environments')
+        .get('plants_environments?_sort=title&_order=asc')
       setEnvironments([
         {
           key: 'all',
@@ -30,6 +46,15 @@ export function PlantSelect() {
     }
 
     fetchEnvironment()
+  }, [])
+
+  useEffect(() => {
+    async function fetchPlants(){
+      const { data } = await api.get('plants?_sort=name&_order=asc')
+      setPlants(data)
+    }
+    
+    fetchPlants()
   }, [])
 
   return (
@@ -54,6 +79,16 @@ export function PlantSelect() {
               title={item.title}  />
           )}
         />
+      </View>
+
+      <View style={styles.plants}>
+        <FlatList 
+          data={plants}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          renderItem={({ item }) => (
+            <PlantCardPrimary data={item} />
+          )}  />
       </View>
     </View>
   )
