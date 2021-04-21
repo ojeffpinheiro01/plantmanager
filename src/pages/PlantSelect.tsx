@@ -31,6 +31,11 @@ interface PlantProps {
 export function PlantSelect() {
   const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
   const [plants, setPlants] = useState<PlantProps[]>([])
+  const [environmentSelected, setEnvironmentSelected] = useState('all')
+
+  function handleEnvironmentSelected(environment: string){
+    setEnvironmentSelected(environment)
+  }
 
   useEffect(() => {
     async function fetchEnvironment() {
@@ -76,7 +81,9 @@ export function PlantSelect() {
           contentContainerStyle={styles.environmentList}
           renderItem={({ item }) => (
             <EnvironmentButton 
-              title={item.title}  />
+              title={item.title}
+              active={ item.key === environmentSelected }
+              onPress={() => handleEnvironmentSelected(item.key) }  />
           )}
         />
       </View>
