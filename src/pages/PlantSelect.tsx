@@ -1,12 +1,37 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, FlatList, StyleSheet } from 'react-native'
 
+import { EnvironmentButton } from '../components/EnvironmentButton'
 import { Header } from '../components/Header'
+import api from '../services/api'
 
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
 
+interface EnvironmentProps {
+  key: string;
+  title: string;
+}
+
 export function PlantSelect() {
+  const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
+
+  useEffect(() => {
+    async function fetchEnvironment() {
+      const { data } = await api
+        .get('plants_environments')
+      setEnvironments([
+        {
+          key: 'all',
+          title: 'Todos'
+        },
+        ...data
+      ])
+    }
+
+    fetchEnvironment()
+  }, [])
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -17,6 +42,18 @@ export function PlantSelect() {
         <Text style={styles.subtitle}>
           você quer colocar sua planta?
         </Text>
+      </View>
+      <View>
+        <FlatList
+          data={environments}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.environmentList}
+          renderItem={({ item }) => (
+            <EnvironmentButton 
+              title={item.title}  />
+          )}
+        />
       </View>
     </View>
   )
@@ -47,6 +84,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     paddingBottom: 5,
+    marginLeft: 32,
     marginVertical: 32
   },
   plants: {
