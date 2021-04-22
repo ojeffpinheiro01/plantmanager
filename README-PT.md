@@ -31,7 +31,7 @@
 # :book: Sobre o projeto 
 O PlantManager é uma aplicação para lembra-lo de regar suas plantas conforme a necessidade da espécie
 Está sendo desenvolvido durante o Next Level Week # 5 - Trilha React Native - oferecido pela Rocketseat
- <h4 align="center">:construction: Em desenvolvimento da versão 2.0 :construction:</h4>
+ <h4 align="center">:construction: Em desenvolvimento :construction:</h4>
  
 ---
 
