@@ -112,5 +112,5 @@ The Layout was developed by [Tiago Luchtenberg](https://www.instagram.com/tiagol
 
 ---
 
->This project was developed with ❤️ by **[Jéferson Pinheiro](https://www.linkedin.com/in/jeferson-pinheiro/)**,  with the instructor **[Rodrigo Santana](https://www.linkedin.com/in/rodrigomir/)** during the **[Next Level Week #4 - Trilha React Native](https://nextlevelweek.com/episodios/reactnative/1/edicao/5)** of **[Rocketseat](https://rocketseat.com.br)** 💜<br> 
+>This project was developed with ❤️ by **[Jéferson Pinheiro](https://www.linkedin.com/in/jeferson-pinheiro/)**,  with the instructor **[Rodrigo Santana](https://www.linkedin.com/in/rodrigomir/)** during the **[Next Level Week #5 - Trilha React Native](https://nextlevelweek.com/episodios/reactnative/1/edicao/5)** of **[Rocketseat](https://rocketseat.com.br)** 💜<br> 
 If it helped you, give it ⭐, it will help me too 😉
