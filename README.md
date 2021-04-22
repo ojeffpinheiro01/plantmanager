@@ -1,4 +1,4 @@
-## [Leia esta página em português](https://github.com/ojeffpinheiro01/plantmanagerblob/main/README-PT.md)
+## [Leia esta página em português](https://github.com/ojeffpinheiro01/plantmanager/blob/main/README-PT.md)
 
 <h1 align="center">
    <img src="assets/logo.svg">
