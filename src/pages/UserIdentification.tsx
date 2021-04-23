@@ -12,6 +12,7 @@ import {
   Keyboard,
   Alert
 } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { Button } from '../components/Button'
 
@@ -39,10 +40,12 @@ export function UserIdentification() {
     setName(value)
   }
 
-  function handleSubmit() {
-    if(!name){
+  async function handleSubmit() {
+    if (!name)
       return Alert.alert('Ooops', 'Como podemos chamar você? 🤔')
-    }
+
+    await AsyncStorage.setItem('@plantmanager:username', name)
+
     navigation.navigate('Confirmation')
   }
 
