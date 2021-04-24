@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native'
+import { useNavigation } from '@react-navigation/core'
 
 import { EnvironmentButton } from '../components/EnvironmentButton'
 import { Header } from '../components/Header'
@@ -39,6 +40,8 @@ export function PlantSelect() {
   const [page, setPage] = useState(1)
   const [loadingMore, setLoadingMore] = useState(false)
 
+  const navigation = useNavigation()
+
   function handleEnvironmentSelected(environment: string) {
     setEnvironmentSelected(environment)
 
@@ -77,6 +80,10 @@ export function PlantSelect() {
     setLoadingMore(true);
     setPage(oldValue => oldValue + 1)
     fetchPlants()
+  }
+
+  function handlePlantSelect(plant: PlantProps){
+    navigation.navigate('PlantSave', {plant})
   }
 
   useEffect(() => {
@@ -141,7 +148,7 @@ export function PlantSelect() {
             loadingMore ? <ActivityIndicator color={colors.green} /> : null
            }
           renderItem={({ item }) => (
-            <PlantCardPrimary data={item} />
+            <PlantCardPrimary data={item} onPress={() => handlePlantSelect(item) } />
           )} />
       </View>
     </View>
