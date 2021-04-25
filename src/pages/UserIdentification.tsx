@@ -44,9 +44,13 @@ export function UserIdentification() {
     if (!name)
       return Alert.alert('Ooops', 'Como podemos chamar você? 🤔')
 
-    await AsyncStorage.setItem('@plantmanager:username', name)
-
-    navigation.navigate('Confirmation')
+    try {
+      await AsyncStorage.setItem('@plantmanager:username', name)
+      navigation.navigate('Confirmation')
+    } catch (err) {
+      Alert.alert('Ooops', 'Houve um erro ao salvar seu nome')
+      console.log(err)
+    }
   }
 
   return (

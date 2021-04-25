@@ -18,7 +18,7 @@ import { format, isBefore } from 'date-fns'
 
 import { Button } from '../components/Button'
 
-import { PlantProps } from '../libs/storage'
+import { PlantProps, plantSave, plantLoad } from '../libs/storage'
 
 import waterDrop from '../assets/waterdrop.png'
 
@@ -51,8 +51,20 @@ export function PlantSave() {
         }
     }
 
-    function handleOpenDateTimePicker(){
+    function handleOpenDateTimePicker() {
         setShowDatePicker(oldState => !oldState)
+    }
+
+    async function handleSave() {
+        try {
+            await plantSave({
+                ...plant,
+                dateTimeNotification: selectedDateTime
+            })
+        } catch (err) {
+            Alert.alert('Oops','Não foi possível salvar')
+            console.log(err)
+        }
     }
 
     return (
@@ -87,7 +99,7 @@ export function PlantSave() {
                     onChange={handleChangeTime} />)}
 
                 {Platform.OS === 'android' && (
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.dataTimePickerButton}
                         onPress={handleOpenDateTimePicker}>
                         <Text style={styles.dataTimePickerText}>
@@ -99,7 +111,7 @@ export function PlantSave() {
 
                 <Button
                     title="Cadastrar Planta"
-                    onPress={() => { }} />
+                    onPress={handleSave} />
 
             </View>
         </View>
