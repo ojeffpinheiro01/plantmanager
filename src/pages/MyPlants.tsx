@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, Text, StyleSheet, FlatList } from 'react-native'
+import { View, Image, Text, FlatList, StyleSheet } from 'react-native'
 import { Jost_500Medium } from '@expo-google-fonts/jost'
 import { formatDistance } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
 import { Header } from '../components/Header'
+import { PlantCardSecondary } from '../components/PlantCardSecondary'
 
 import { plantLoad, PlantProps } from '../libs/storage'
 
@@ -12,9 +13,8 @@ import waterDrop from '../assets/waterdrop.png'
 
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
-import { PlantCardSecondary } from '../components/PlantCardSecondary'
 
-export function MyPLants() {
+export function MyPlants() {
     const [myPlants, setMyPlants] = useState<PlantProps[]>([])
     const [loading, setLoading] = useState(true)
     const [nextWatered, setNextWatered] = useState<string>()
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 30,
-        paddingTop: Jost_500Medium,
+        paddingTop: 50,
         backgroundColor: colors.background
     },
     spotlight: {

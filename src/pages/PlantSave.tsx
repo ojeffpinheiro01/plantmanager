@@ -68,7 +68,7 @@ export function PlantSave() {
                 subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado',
                 buttonTitle: 'Muito Obrigado',
                 icon: 'hug',
-                nextScreen: 'MyPLants'
+                nextScreen: 'MyPlants'
             })
         } catch (err) {
             Alert.alert('Oops', 'Não foi possível salvar')
