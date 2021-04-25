@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 
+import { PlantProps } from '../libs/storage'
+
 import { EnvironmentButton } from '../components/EnvironmentButton'
 import { Header } from '../components/Header'
 import { PlantCardPrimary } from '../components/PlantCardPrimary'
@@ -17,18 +19,7 @@ interface EnvironmentProps {
   title: string;
 }
 
-interface PlantProps {
-  id: string;
-  name: string;
-  about: string;
-  water_tips: string;
-  photo: string;
-  environments: [string];
-  frequency: {
-    times: number;
-    repeat_every: string;
-  }
-}
+
 
 export function PlantSelect() {
   const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
