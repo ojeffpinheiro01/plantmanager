@@ -46,7 +46,13 @@ export function UserIdentification() {
 
     try {
       await AsyncStorage.setItem('@plantmanager:username', name)
-      navigation.navigate('Confirmation')
+      navigation.navigate('Confirmation', {
+        title: 'Prontinho',
+        subtitle: 'Agora vamos começar a cuidar das suas plantinhas com muito cuidado',
+        buttonTitle: 'COMEÇAR',
+        icon: 'smile',
+        nextScreen: 'PlantSelect'
+      })
     } catch (err) {
       Alert.alert('Ooops', 'Houve um erro ao salvar seu nome')
       console.log(err)
