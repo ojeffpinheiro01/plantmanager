@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, Text, FlatList, StyleSheet } from 'react-native'
-import { Jost_500Medium } from '@expo-google-fonts/jost'
+import { View, Image, Text, FlatList, StyleSheet, Alert } from 'react-native'
 import { formatDistance } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
@@ -8,17 +7,37 @@ import { Header } from '../components/Header'
 import { PlantCardSecondary } from '../components/PlantCardSecondary'
 import { Load } from '../components/Load'
 
-import { plantLoad, PlantProps } from '../libs/storage'
+import { plantLoad, PlantProps, plantDelete } from '../libs/storage'
 
 import waterDrop from '../assets/waterdrop.png'
 
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
 
+
 export function MyPlants() {
     const [myPlants, setMyPlants] = useState<PlantProps[]>([])
     const [loading, setLoading] = useState(true)
     const [nextWatered, setNextWatered] = useState<string>()
+
+    function handleRemove(plant: PlantProps) {
+        Alert.alert('Remover', `Deseja remover a ${plant.name}?`, [
+            { text: 'NÃO', style: 'cancel' },
+            {
+                text: 'SIM', onPress: async () => {
+                    try {
+                        await plantDelete(plant.id)
+                        setMyPlants((oldData) => 
+                            oldData.filter((item) => item.id !== plant.id)
+                        )
+
+                    } catch (err) {
+                        Alert.alert('Oops', 'Houve um erro ao remover')
+                    }
+                }
+            },
+        ])
+    }
 
     useEffect(() => {
         async function loadStorageData() {
@@ -37,7 +56,7 @@ export function MyPlants() {
 
     }, [])
 
-    if(loading)
+    if (loading)
         return <Load />
 
     return (
@@ -57,7 +76,9 @@ export function MyPlants() {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ flex: 1 }}
                     renderItem={({ item }) => (
-                        <PlantCardSecondary data={item} />
+                        <PlantCardSecondary
+                            data={item}
+                            handleRemove={() => { handleRemove(item) }} />
                     )} />
             </View>
 
