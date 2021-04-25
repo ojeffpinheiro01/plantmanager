@@ -3,7 +3,6 @@ import {
     View,
     Text,
     Image,
-    FlatList,
     TouchableOpacity,
     Platform,
     ScrollView,
@@ -18,7 +17,7 @@ import { format, isBefore } from 'date-fns'
 
 import { Button } from '../components/Button'
 
-import { PlantProps, plantSave, plantLoad } from '../libs/storage'
+import { PlantProps, plantSave } from '../libs/storage'
 
 import waterDrop from '../assets/waterdrop.png'
 
@@ -77,7 +76,10 @@ export function PlantSave() {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView 
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.container}>
+           <View style={styles.container}>
             <View style={styles.plantInfo}>
                 <SvgFromUri
                     uri={plant.photo}
@@ -123,7 +125,8 @@ export function PlantSave() {
                     onPress={handleSave} />
 
             </View>
-        </View>
+        </View> 
+        </ScrollView>
     )
 }
 
